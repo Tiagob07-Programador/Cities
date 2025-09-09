@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center align-items-center vh-100 bg-light">
+  <div class="container bg-body-tertiary w-50 p-4 rounded shadow">
+    <h1 class="display-4 text-center mb-4">Cadastro de Cidades</h1>
+
+    <form [formGroup]="formGroupCity">
+      <div class="mb-3">
+        <label for="inputid" class="form-label">Id</label>
+        <input type="number" formControlName="id" min="0" class="form-control" id="inputid" placeholder="0">
+      </div>
+
+      <div class="mb-3">
+        <label for="inputCity" class="form-label">Cidade</label>
+        <input type="text" formControlName="city" class="form-control" id="inputCity" placeholder="Nome da cidade">
+      </div>
+
+      <div class="mb-3">
+        <label for="inputPopulation" class="form-label">População</label>
+        <input type="text" formControlName="population" mask="separator.0" thousandSeparator="." class="form-control" id="inputPopulation" placeholder="Ex: 1.000.000">
+      </div>
+
+      <div class="mb-3">
+        <label for="inputCountry" class="form-label">País</label>
+        <input type="text" formControlName="country" class="form-control" id="inputCountry" placeholder="Ex. Brasil">
+      </div>
+
+      <div class="mb-4">
+        <label for="SelectState" class="form-label">Estado</label>
+        <select class="form-select" id="state" formControlName="state">
+          <option value="">Selecione...</option>
+          <option *ngFor="let uf of states" [value]="uf">{{ uf }}</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary w-25" (click) = "save()">Salvar</button>
+    </form>
+  </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-4 mb-3" *ngFor="let city of cities">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">{{ city.city }}</h5>
+          <p class="card-text">
+            <strong>ID:</strong> {{ city.id }} <br>
+            <strong>População:</strong> {{ city.population | number:'1.0-0' }} <br>
+            <strong>Estado:</strong> {{ city.state }} <br>
+            <strong>País:</strong> {{ city.country }}
+          </p>
+        </div>
+      </div>
+    </div>
+</div>
